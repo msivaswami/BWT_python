@@ -110,7 +110,7 @@ while True:
     print("Choose an option:")
     print("1. Perform Burrows-Wheeler Transform")
     print("2. Inverse Burrows-Wheeler Transform")
-    print("3. Calculate1 size of a string")
+    print("3. Calculate size of a string")
     print("4. Measure Compression")
     print("5. Exit")
 
