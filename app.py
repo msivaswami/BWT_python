@@ -85,13 +85,13 @@ def measure_compression(input_sequence):
 
     original_size = len(input_sequence)
     compressed_size = len(bwt_encoded)
-    compression_rate = compressed_size / original_size if original_size != 0 else 0
+    compression_rate = (compressed_size - original_size) / original_size if original_size != 0 else 0
 
     return pd.DataFrame({
         'Sequence': [input_sequence],
         'Original Sequence': [string_original],
         'SequenceLength': [original_size],
-        'CompressionRate': [compression_rate * 100]  # Multiply by 100 to represent as percentage
+        'CompressionRate%': [compression_rate * 100]  # Multiply by 100 to represent as percentage
     })
 
 #Predefined options for strings
