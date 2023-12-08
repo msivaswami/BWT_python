@@ -1,12 +1,7 @@
-#-----------------------------------------------------------------#
-#BWT Programming
-#Python implementation of the project as part of the coursework for NGS Module on the MSc. Bioinformatics Module.
-#Authors - B Gaber (2538271), H Pandhi (2694547), H Gholazideh (2710124) and M Sivaswami (1833616)
-#-----------------------------------------------------------------#
-
-
-#Importing necessary libraries
-import sys
+import tkinter as tk
+from tkinter import ttk
+from tkinter import scrolledtext
+from tkinter import simpledialog
 import pandas as pd
 
 #Define the custom implementation of Burrows-Wheeler Transform ()
@@ -85,90 +80,86 @@ def measure_compression(input_sequence):
 
     original_size = len(input_sequence)
     compressed_size = len(bwt_encoded)
-    compression_rate = compressed_size / original_size if original_size != 0 else 0
+    compression_rate = (original_size - compressed_size) / original_size if original_size != 0 else 0
 
     return pd.DataFrame({
         'Sequence': [input_sequence],
         'Original Sequence': [string_original],
         'SequenceLength': [original_size],
-        'CompressionRate': [compression_rate * 100]  # Multiply by 100 to represent as percentage
+        'CompressionRate%': [compression_rate * 100]  # Multiply by 100 to represent as percentage
     })
 
-#Predefined options for strings
-strings_to_process = [
-    "GATTACA",
-    "ATTACATTAC",
-    "ATATATATATA",
-    "ATATATATAT",
-    "AATAATAATAAT",
-    "AAAATAAATAAA",
-    "ATATACACACA",
-    "ATATGTATACAT"
-]
+class BWTApp:
+    def __init__(self, master):
+        self.master = master
+        master.title("BWT Application")
 
-while True:
-    print("Choose an option:")
-    print("1. Perform Burrows-Wheeler Transform")
-    print("2. Inverse Burrows-Wheeler Transform")
-    print("3. Calculate1 size of a string")
-    print("4. Measure Compression")
-    print("5. Exit")
+        self.create_widgets()
 
-    option = input("Enter the number corresponding to your choice: ")
+    def create_widgets(self):
+        # Labels
+        self.label_instruction = ttk.Label(self.master, text="Choose an option:")
+        self.label_instruction.grid(row=0, column=0, columnspan=2, pady=10)
 
-    if option == '5':
-        print("Exiting the program.")
-        break
+        # Buttons
+        self.button_bwt = ttk.Button(self.master, text="Perform BWT", command=self.perform_bwt)
+        self.button_bwt.grid(row=1, column=0, pady=5)
 
-    if option == '1':
-        user_input = input("Please enter the sequence: ").strip()
+        self.button_inverse_bwt = ttk.Button(self.master, text="Inverse BWT", command=self.inverse_bwt)
+        self.button_inverse_bwt.grid(row=1, column=1, pady=5)
+
+        self.button_calculate_size = ttk.Button(self.master, text="Calculate Size", command=self.calculate_size)
+        self.button_calculate_size.grid(row=2, column=0, pady=5)
+
+        self.button_measure_compression = ttk.Button(self.master, text="Measure Compression", command=self.measure_compression)
+        self.button_measure_compression.grid(row=2, column=1, pady=5)
+
+        self.button_exit = ttk.Button(self.master, text="Exit", command=self.master.destroy)
+        self.button_exit.grid(row=3, column=0, columnspan=2, pady=10)
+
+    def perform_bwt(self):
+        user_input = self.get_user_input("Enter the sequence for BWT:")
         bwt_result, bwt_encoded = bwt(user_input)
+        self.display_result("BWT result of the entered sequence is:", bwt_encoded)
+        self.show_matrix("Possible rotations and sorted forms:", bwt_result)
 
-        user_input_2 = input("Do you want to see all the possible permutations sorted? ").strip().lower()
-
-        if user_input_2 in ["yes", "y"]:
-            print("\nHere are all the possible permutations and sorted form: ")
-            print(bwt_result)
-
-        print("\nBWT result of your entered sequence is: ", bwt_encoded)
-        print()
-
-    elif option == '2':
-        user_input_inverse = input("Please enter the BWT Inverse sequence: ").strip()
+    def inverse_bwt(self):
+        user_input_inverse = self.get_user_input("Enter the BWT Inverse sequence:")
         inverse_result, string_original = bwt_inverse(user_input_inverse)
-        print("\nInverse BWT sequence is:", string_original)
-        print("\nVisualization:")
-        print(inverse_result)
-        print()
+        self.display_result("Inverse BWT sequence is:", string_original)
+        self.show_matrix("Visualization:", inverse_result)
 
-    elif option == '3':
-        print("Choose an option for string size calculation:")
-        print("1. Enter a custom string")
-        print("2. Use a predefined sequence")
-
-        size_option = input("Enter the number corresponding to your choice: ")
-
-        if size_option == '1':
-            input_string = input("Enter the string to calculate its size: ").strip()
-        elif size_option == '2':
-            print("Choose a predefined string:")
-            for i, string in enumerate(strings_to_process):
-                print(f"{i + 1}. {string}")
-            choice = int(input("Enter the number corresponding to your choice: "))
-            input_string = strings_to_process[choice - 1]
-        else:
-            print("Invalid input. Please enter a valid option.")
-            continue
-
+    def calculate_size(self):
+        input_string = self.get_user_input("Enter the string to calculate its size:")
         size_in_bytes = calculate_size(input_string)
-        print(f"Size in bytes: {size_in_bytes}")
+        self.display_result("Size in bytes:", size_in_bytes)
 
-    elif option == '4':
-        user_input = input("Please enter the sequence for compression measurement: ").strip()
+    def measure_compression(self):
+        user_input = self.get_user_input("Enter the sequence for compression measurement:")
         compression_result = measure_compression(user_input)
-        print("\nCompression Measurement:")
-        print(compression_result)
-        print()
+        self.display_result("Compression Measurement:", compression_result)
 
-    else:
-        print("Invalid input. Please enter a valid option.")
+    def get_user_input(self, prompt):
+        user_input = simpledialog.askstring("Input", prompt)
+        return user_input.strip() if user_input else ""
+
+    def display_result(self, label_text, result_text):
+        result_label = ttk.Label(self.master, text=label_text)
+        result_label.grid(row=4, column=0, columnspan=2)
+        result_textbox = scrolledtext.ScrolledText(self.master, wrap=tk.WORD, width=40, height=5)
+        result_textbox.grid(row=5, column=0, columnspan=2, pady=5)
+        result_textbox.insert(tk.END, result_text)
+        result_textbox.configure(state='disabled')
+
+    def show_matrix(self, label_text, matrix_df):
+        self.display_result(label_text, matrix_df.to_string(index=False))
+
+
+# Create the main window
+root = tk.Tk()
+
+# Instantiate the BWTApp
+app = BWTApp(root)
+
+# Run the application
+root.mainloop()
