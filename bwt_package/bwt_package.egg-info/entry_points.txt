@@ -1,0 +1,2 @@
+[console_scripts]
+bwt_script = bwt_package.bwt_script:main

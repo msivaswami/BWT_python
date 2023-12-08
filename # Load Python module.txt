@@ -1,0 +1,16 @@
+# Load Python module
+module load bear-apps/2021b
+module load Python/3.9.6-GCCcore-11.2.0-bare
+
+# Create a virtual environment 
+python -m venv myenv
+source myenv/bin/activate
+
+# Install Pandas
+pip install pandas
+
+# Verify installation
+python -c "import pandas as pd; print(pd.__version__)"
+
+# Deactivate the virtual environment (if you created one)
+deactivate

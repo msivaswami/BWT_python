@@ -1,0 +1,7 @@
+#Running this script to create an executable
+pyinstaller --onefile bwt_tool.py
+
+#zipping 
+
+zip -r bwt_tool.zip dist/
+
