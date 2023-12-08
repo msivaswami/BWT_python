@@ -85,13 +85,13 @@ def measure_compression(input_sequence):
 
     original_size = len(input_sequence)
     compressed_size = len(bwt_encoded)
-    compression_rate = (original_size - compressed_size) / original_size if original_size != 0 else 0
+    compression_rate = compressed_size / original_size if original_size != 0 else 0
 
     return pd.DataFrame({
         'Sequence': [input_sequence],
         'Original Sequence': [string_original],
         'SequenceLength': [original_size],
-        'CompressionRate%': [compression_rate * 100]  # Multiply by 100 to represent as percentage
+        'CompressionRate': [compression_rate * 100]  # Multiply by 100 to represent as percentage
     })
 
 #Predefined options for strings
@@ -110,7 +110,7 @@ while True:
     print("Choose an option:")
     print("1. Perform Burrows-Wheeler Transform")
     print("2. Inverse Burrows-Wheeler Transform")
-    print("3. Calculate size of a string")
+    print("3. Calculate1 size of a string")
     print("4. Measure Compression")
     print("5. Exit")
 
