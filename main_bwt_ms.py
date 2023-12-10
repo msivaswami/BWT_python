@@ -1,7 +1,7 @@
 #-----------------------------------------------------------------#
 #BWT Programming
 #Python implementation of the project as part of the coursework for NGS Module on the MSc. Bioinformatics Module.
-#Authors - B Gaber (2538271), H Pandhi (2694547), H Gholazideh (2710124) and M Sivaswami (1833616)
+#Authors - B Gaber (2538271), H Pandhi (2694547), H Gholizadeh (2710124) and M Sivaswami (1833616)
 #-----------------------------------------------------------------#
 
 
