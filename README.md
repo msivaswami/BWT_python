@@ -9,9 +9,11 @@ User Manual for BWT app built in Python
 This user guide was written in R by M Sivaswami (1833616) for the python code written as part of the BWT Programming Coursework by B Gaber (2538271), H Pandhi (2694547), H Gholazideh (2710124) and M Sivaswami (1833616).
 
 Introduction
+
 The BWT app allows users to apply the Burrows-Wheeler Transform to a given string and obtain the BWT encoded string. Users can also perform the inverse BWT to retrieve the original string. Additionally, the app provides features to calculate the size of a string in bytes and measure its compression rate.
 
 Dependencies
+
 Before running the app, ensure that the following dependencies are installed:
 
 sys: provides access to system-specific parameters and functions.
@@ -51,9 +53,11 @@ The program uses the input() function to receive user input and executes the cor
 Note that the program includes a predefined list of strings called strings_to_process. These strings can be used to test the functionality of the app. The user can choose to either enter a custom string or select one of the predefined strings for size calculation.
 
 Usage
+
 To use the BWT app, follow these steps:
 
 Run the program.
+
 Follow the instructions provided in the menu.
 Choose the desired option by entering the corresponding number.
 Provide valid inputs when prompted to ensure correct execution of the program.
