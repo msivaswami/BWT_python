@@ -1,8 +1,11 @@
-User Manual \n
+User Manual
 
 Author - Muthukumaraswami Sivaswami (1833616)
+
 2023-12-07
+
 User Manual for BWT app built in Python
+
 This user guide was written in R by M Sivaswami (1833616) for the python code written as part of the BWT Programming Coursework by B Gaber (2538271), H Pandhi (2694547), H Gholazideh (2710124) and M Sivaswami (1833616).
 
 Introduction
