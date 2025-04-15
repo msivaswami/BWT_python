@@ -17,6 +17,7 @@ Dependencies
 Before running the app, ensure that the following dependencies are installed:
 
 sys: provides access to system-specific parameters and functions. 
+
 pandas: a powerful data analysis and manipulation library. 
 
 # Functions
