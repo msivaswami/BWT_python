@@ -16,9 +16,11 @@ Dependencies
 
 Before running the app, ensure that the following dependencies are installed:
 
-sys: provides access to system-specific parameters and functions.
-pandas: a powerful data analysis and manipulation library.
-Functions
+sys: provides access to system-specific parameters and functions. 
+pandas: a powerful data analysis and manipulation library. 
+
+# Functions
+
 bwt(string):
 
 This function takes a string as input and returns the Burrows-Wheeler Transform (BWT) of the string. The BWT is obtained by cyclically permuting the string and sorting the permutations lexicographically. The function returns a Pandas DataFrame matrix containing the possible rotations and their sorted forms, and the BWT encoded string as its output.
